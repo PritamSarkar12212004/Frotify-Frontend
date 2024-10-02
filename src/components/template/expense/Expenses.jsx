@@ -51,24 +51,23 @@ function Expenses() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full p-4 h-[90vh] overflow-y-auto">
+    <div className="flex flex-col items-center w-full md:p-4 px-2 md:h-[90vh] h-[95vh] overflow-y-auto">
       <h1 className="text-4xl font-bold text-blue-800 mb-6 animate-pulse">
         My Expenses
       </h1>
       <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg">
-        <div className="grid grid-cols-5 gap-4 text-xs font-semibold text-gray-600 uppercase tracking-wide p-4 border-b">
+        <div className="grid grid-cols-4 gap-4 text-xs font-semibold text-gray-600 uppercase tracking-wide p-4 border-b">
           <div>Name</div>
           <div>Money</div>
           <div>Date</div>
           <div>Type</div>
-          <div>Action</div>
         </div>
 
         <div ref={expensesRef}>
           {moneydata.map((item) => (
             <div
               key={item.id}
-              className={`grid grid-cols-5 gap-4 p-3 mb-2 rounded-lg shadow-md transform transition duration-500   hover:shadow-lg ${
+              className={`grid grid-cols-4 gap-4 p-3 mb-2 rounded-lg shadow-md transform transition duration-500   hover:shadow-lg ${
                 item.transType === "Credit" ? "bg-red-500" : "bg-green-500"
               }`}
             >
@@ -87,21 +86,14 @@ function Expenses() {
                 <FaRegCreditCard className="text-xl mr-2 text-purple-500" />
                 <span>{item.transType}</span>
               </div>
-              <div className="flex items-center">
-                <button
-                  onClick={() => deleteControl(item._id)}
-                  className="text-red-600 hover:text-red-900 transition duration-200"
-                >
-                  <AiFillDelete className="text-2xl" />
-                </button>
-              </div>
+             
             </div>
           ))}
 
           {data.map((item) => (
             <div
               key={item.id}
-              className={`grid grid-cols-5 gap-4 p-3 mb-2 rounded-lg shadow-md transform transition duration-500   hover:shadow-lg ${
+              className={`grid grid-cols-4 gap-4 p-3 mb-2 rounded-lg shadow-md transform transition duration-500   hover:shadow-lg ${
                 item.transType === "Debit" ? "bg-green-500" : "bg-red-500"
               }`}
             >
@@ -120,14 +112,7 @@ function Expenses() {
                 <FaRegCreditCard className="text-xl mr-2 text-purple-500" />
                 <span>{item.transType}</span>
               </div>
-              <div className="flex items-center">
-                <button
-                  onClick={() => deleteControl(item._id)}
-                  className="text-green-600 hover:text-green-900 transition duration-200"
-                >
-                  <AiFillDelete className="text-2xl" />
-                </button>
-              </div>
+            
             </div>
           ))}
         </div>

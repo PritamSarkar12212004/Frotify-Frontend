@@ -39,20 +39,20 @@ function ExpenseEdit() {
   return (
     <>
       {data && history ? (
-        <div className="px-4 py-4 h-[90vh] overflow-y-auto">
+        <div className="md:px-4 px-2 md:py-4 md:h-[90vh] mt-2 overflow-y-auto">
           <nav className="w-full flex items-center justify-start">
             <span
               className="flex items-center gap-3  cursor-pointer"
               onClick={() => navigate(-1)}
             >
-              <span className="text-3xl ">
+              <span className="md:text-3xl text-2xl ">
                 <i class="ri-arrow-left-fill"></i>
               </span>
-              <span className="text-2xl font-bold">My Expenses</span>
+              <span className="md:text-2xl text-xl font-bold">My Expenses</span>
             </span>
           
           </nav>
-          <div className="flex w-full gap-2 mt-3">
+          <div className="flex md:flex-row flex-col w-full md:gap-2 gap-3 mt-3 md:mb-0 mb-3">
             <Cart item={data} />
             <UpdateForm
               item={data._id}

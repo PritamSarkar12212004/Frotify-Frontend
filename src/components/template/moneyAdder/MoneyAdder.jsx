@@ -23,9 +23,9 @@ function MoneyAdder({ setmoneyAdderrcontrol ,setloader}) {
     reset();
   };
   return (
-    <div className="absolute w-full h-[90vh] bg-zinc-500/30 backdrop-blur-sm top-0 left-0 z-50  flex justify-center   items-center ">
-      <div className=" w-1/2 bg-white rounded-lg shadow-lg p-6">
-        <span className="flex w-full justify-between capitalize">
+    <div className="absolute w-full md:h-[90vh] h-full bg-zinc-500/30 backdrop-blur-sm top-0 left-0 z-50  flex justify-center   items-center ">
+      <div className=" md:w-1/2  bg-white rounded-lg shadow-lg p-6">
+        <span className="flex w-full justify-between capitalize text-lg ">
           increase your budget
           <span
             className="cursor-pointer"
@@ -39,7 +39,7 @@ function MoneyAdder({ setmoneyAdderrcontrol ,setloader}) {
           onSubmit={handleSubmit(formSubmit)}
         >
           <span>
-            <label className="text-sm opacity-75 font-bold" htmlFor="n">
+            <label className="md:text-sm text-lg  opacity-75 font-bold" htmlFor="n">
               Budget Amount
             </label>
             <input
@@ -65,7 +65,7 @@ function MoneyAdder({ setmoneyAdderrcontrol ,setloader}) {
             <option value="Passive ">Passive </option>
           </select>
           <span>
-            <label className="text-sm opacity-75 font-bold" htmlFor="n">
+            <label className="md:text-sm text-lg  opacity-75 font-bold" htmlFor="n">
               Budget Name
             </label>
             <input

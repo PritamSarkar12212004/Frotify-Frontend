@@ -9,7 +9,7 @@ function BudagetComponents({ item }) {
 
   return (
     <NavLink to={`/expenses/${item._id}`}>
-      <div className="w-80 h-44 border-[2px] border-zinc-300 rounded-xl bg-zinc-300 backdrop-blur-sm shadow-md flex flex-col justify-between cursor-pointer duration-300 px-4 py-4">
+      <div className="md:w-80 w-[90vw] h-44 border-[2px] border-zinc-300 rounded-xl bg-zinc-300 backdrop-blur-sm shadow-md flex flex-col justify-between cursor-pointer duration-300 px-4 py-4">
         <div className="w-full flex justify-between">
           <span className="flex flex-col  text-xl">
             {/* <span>{icon}</span> */} 

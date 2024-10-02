@@ -14,20 +14,23 @@ function BudgetMaker({ setbudgat, setreload, dataprofile }) {
     const { amount } = data;
     const MainAmount = parseInt(amount);
     if (Budget - MainAmount >= 0) {
-      AxiosConifg.post("/expense/create", { data, email, transType, Budget });
+      AxiosConifg.post("/expense/create", { data, email, transType, Budget })
+        .then((res) => {
+          setbudgat(false);
+          setreload(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       reset();
-      setbudgat(false);
-      setTimeout(() => {
-        setreload(true);
-      }, 1000);
     } else {
-     alert("Amount is out of Budget")
+      alert("Amount is out of Budget");
     }
   };
 
   return (
     <div className="w-full z-50 h-screen absolute top-0 left-0 bg-zinc-700/70 backdrop-blur-sm flex justify-center items-center">
-      <div className="w-[35vw] rounded-3xl px-7 py-5  bg-white">
+      <div className="md:w-[35vw] w-full rounded-3xl px-7 md:py-5 py-16  bg-white">
         <div className="flex w-full justify-between items-center">
           <span className="text-xl"> Create New Budget </span>
           <span

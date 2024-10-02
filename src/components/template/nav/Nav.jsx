@@ -19,7 +19,7 @@ function Nav() {
   return (
     <>
       {auth ? (
-        <div className="px-4 py-2 flex h-[10vh]   md:justify-between justify-end items-center border-b-[1px] relative border-gray-300">
+        <div className="md:px-4 md:py-2 py-5 flex md:h-[10vh] h-[5vh]    md:justify-between justify-end items-center border-b-[1px] relative border-gray-300">
           <div className="md:flex flex-col hidden gap-2 bg-white backdrop-blur-sm sticky top-0 ">
             <div className="text-lg font-bold">Atro{location.pathname}</div>
             <span className="text-xl font-mono font-bold">

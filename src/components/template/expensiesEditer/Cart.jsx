@@ -17,29 +17,29 @@ function Cart({ item }) {
     validAmount > 0 ? (validSpend / validAmount) * 100 : 0;
 
   return (
-    <div className="w-1/2 h-44 border-[2px] border-zinc-300 rounded-xl bg-zinc-100 backdrop-blur-sm shadow-md flex flex-col justify-between cursor-pointer duration-300 px-4 py-4">
+    <div className="md:w-1/2 w-full md:h-44 h-56 border-[2px] border-zinc-300 rounded-xl bg-zinc-100 backdrop-blur-sm shadow-md flex flex-col justify-between cursor-pointer duration-300 px-4 py-4">
       <div className="w-full flex justify-between">
         <span className="flex flex-col text-xl">
           {/* <span>{icon}</span> */}
           <span className="capitalize">{category}</span>
           <span className="text-sm opacity-70 lowercase">{name}</span>
         </span>
-        <span className="flex gap-3 text-2xl text-blue-600 font-bold">
-          ${validAmount.toFixed(2)}
+        <span className="flex gap-3 md:text-2xl text-3xl text-blue-600 font-bold">
+        ₹{validAmount.toFixed(2)}
         </span>
       </div>
       <div className="mt-3">
         {/* Custom Progress Bar */}
-        <div className="w-full bg-gray-300 rounded-full h-3">
+        <div className="w-full bg-gray-300 rounded-full md:h-3 h-5">
           <div
-            className="bg-blue-600 h-3 rounded-full"
+            className="bg-blue-600 md:h-3 h-5  rounded-full"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
-        <div className="mt-2 flex justify-between text-sm text-gray-600">
-          <span className="text-red-500">Spent: ${validSpend.toFixed(2)}</span>
+        <div className="mt-2 flex justify-between md:text-sm text-lg text-gray-600">
+          <span className="text-red-500">Spent: ₹{validSpend.toFixed(2)}</span>
           <span className="text-green-500">
-            Remain Amount: ${validRemainAmount.toFixed(2)}
+            Re. Am.: ₹{validRemainAmount.toFixed(2)}
           </span>
         </div>
       </div>

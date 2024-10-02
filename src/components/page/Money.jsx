@@ -25,7 +25,7 @@ const Money = () => {
   return (
     <>
       {data ? (
-        <div className="min-h-screen bg-white p-6 flex flex-col items-center">
+        <div className="md:min-h-[90vh] h-[95vh] bg-white p-6 flex flex-col items-center">
           {moneyAddercontrol ? (
             <MoneyAdder
               setmoneyAdderrcontrol={setmoneyAdderrcontrol}
