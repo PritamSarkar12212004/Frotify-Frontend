@@ -4,9 +4,15 @@ import AxiosConifg from "../../../utils/api/AxiosConifg";
 
 function UpdateForm({ item, setreload, remain }) {
   const { register, handleSubmit, reset } = useForm();
+  const [erroe, seterror] = useState(false);
+
   const formControoler = (data) => {
     if (remain - data.amount < 0) {
-      alert("Amount is not enough");
+      seterror(true);
+
+      setTimeout(() => {
+        seterror(false);
+      }, 1000);
     } else {
       AxiosConifg.post("/history/create", { data, item })
         .then((res) => {
@@ -57,6 +63,13 @@ function UpdateForm({ item, setreload, remain }) {
           </button>
         </span>
       </form>
+      <span className="w-full flex justify-center mt-2 ">
+        {erroe ? (
+          <span className="py-4 px-8 font-bold text-red-500 border-[1px] border-red-500">
+            Out OF Budget
+          </span>
+        ) : null}
+      </span>
     </div>
   );
 }

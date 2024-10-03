@@ -5,6 +5,7 @@ import Cart from "../template/expensiesEditer/Cart";
 import UpdateForm from "../template/expensiesEditer/UpdateForm";
 import HIstoryExpense from "../template/expensiesEditer/HIstoryExpense";
 
+
 function ExpenseEdit() {
   const param = useParams();
   const [reload, setreload] = useState([]);
@@ -13,7 +14,7 @@ function ExpenseEdit() {
   const navigate = useNavigate();
 
   const DataLoad = () => {
-    AxiosConifg.post("/expense//child/cheker", param)
+    AxiosConifg.post("/expense/child/cheker", param)
       .then((res) => {
         setdata(res.data);
       })

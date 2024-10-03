@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import AxiosConifg from "../../../utils/api/AxiosConifg";
 import contextMaker from "../../../context/contextMaker";
 
-function BudgetMaker({ setbudgat, setreload, dataprofile }) {
+function BudgetMaker({ setbudgat, setreload, dataprofile, setOpen }) {
   const { Budget } = dataprofile;
 
   const { data } = useContext(contextMaker);
   const email = data.email;
   const { reset, handleSubmit, register } = useForm();
+  const [erroe, seterror] = useState(false);
   const transType = "Credit";
   const formSubmit = (data) => {
     const { amount } = data;
@@ -17,14 +18,19 @@ function BudgetMaker({ setbudgat, setreload, dataprofile }) {
       AxiosConifg.post("/expense/create", { data, email, transType, Budget })
         .then((res) => {
           setbudgat(false);
-          setreload(true);
+          setreload(res.data);
+          setOpen(true);
         })
         .catch((err) => {
           console.log(err);
         });
       reset();
     } else {
-      alert("Amount is out of Budget");
+      seterror(true);
+
+      setTimeout(() => {
+        seterror(false);
+      }, 1000);
     }
   };
 
@@ -90,6 +96,13 @@ function BudgetMaker({ setbudgat, setreload, dataprofile }) {
             Create Budget
           </button>
         </form>
+        <span className="w-full flex justify-center ">
+          {erroe ? (
+            <span className="py-4 px-8 font-bold text-red-500 border-[1px] border-red-500">
+              Out OF Budget
+            </span>
+          ) : null}
+        </span>
       </div>
     </div>
   );

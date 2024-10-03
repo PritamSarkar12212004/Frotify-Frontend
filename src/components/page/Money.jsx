@@ -2,15 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import AxiosConifg from "../../utils/api/AxiosConifg";
 import contextMaker from "../../context/contextMaker";
 import MoneyAdder from "../template/moneyAdder/MoneyAdder";
+import MainLoading from "../extra/Loading/MainLoading";
+import MoneyAdded from "../extra/alert/MoneyAdded";
 
 const Money = () => {
   document.title = "Wallet";
   const { auth } = useContext(contextMaker);
   const [data, setdata] = useState();
   const [loader, setloader] = useState([]);
+  const [open, setOpen] = useState(false);
   const [moneyAddercontrol, setmoneyAdderrcontrol] = useState(false);
   const moneyAdderContrller = () => {
-    setmoneyAdderrcontrol(!moneyAddercontrol);
+    setmoneyAdderrcontrol(true);
   };
   useEffect(() => {
     AxiosConifg.post("/profile/cheker", auth)
@@ -28,6 +31,7 @@ const Money = () => {
         <div className="md:min-h-[90vh] h-[95vh] bg-white p-6 flex flex-col items-center">
           {moneyAddercontrol ? (
             <MoneyAdder
+            setOpen={setOpen}
               setmoneyAdderrcontrol={setmoneyAdderrcontrol}
               setloader={setloader}
             />
@@ -35,7 +39,7 @@ const Money = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
             Money Dashboard
           </h1>
-
+          <MoneyAdded setOpen={setOpen} open={open} />
           {/* Cards Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 w-full max-w-6xl">
             {/* Card for Total Balance */}
@@ -78,7 +82,9 @@ const Money = () => {
             </button>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <MainLoading />
+      )}
     </>
   );
 };

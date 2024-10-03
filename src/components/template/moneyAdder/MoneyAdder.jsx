@@ -3,23 +3,22 @@ import { useForm } from "react-hook-form";
 import AxiosConifg from "../../../utils/api/AxiosConifg";
 import contextMaker from "../../../context/contextMaker";
 
-function MoneyAdder({ setmoneyAdderrcontrol ,setloader}) {
+function MoneyAdder({ setmoneyAdderrcontrol, setloader, setOpen }) {
   const transType = "Debit";
   const { auth } = useContext(contextMaker);
   const { register, handleSubmit, reset } = useForm();
 
-  
   const formSubmit = (data) => {
     AxiosConifg.post("/money/add", { data, transType, auth })
       .then((res) => {
         setmoneyAdderrcontrol(false);
         setloader(res.data);
+        setOpen(true);
       })
       .catch((err) => {
         console.log(err);
       });
-    
-    
+
     reset();
   };
   return (
@@ -39,7 +38,10 @@ function MoneyAdder({ setmoneyAdderrcontrol ,setloader}) {
           onSubmit={handleSubmit(formSubmit)}
         >
           <span>
-            <label className="md:text-sm text-lg  opacity-75 font-bold" htmlFor="n">
+            <label
+              className="md:text-sm text-lg  opacity-75 font-bold"
+              htmlFor="n"
+            >
               Budget Amount
             </label>
             <input
@@ -65,7 +67,10 @@ function MoneyAdder({ setmoneyAdderrcontrol ,setloader}) {
             <option value="Passive ">Passive </option>
           </select>
           <span>
-            <label className="md:text-sm text-lg  opacity-75 font-bold" htmlFor="n">
+            <label
+              className="md:text-sm text-lg  opacity-75 font-bold"
+              htmlFor="n"
+            >
               Budget Name
             </label>
             <input

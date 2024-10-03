@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AxiosConifg from "../../../utils/api/AxiosConifg";
 import { FaWallet, FaChartPie, FaPiggyBank } from "react-icons/fa"; // Modern icons
 import { motion } from "framer-motion"; // Animation library
 
-function DashboardCard() {
-  const [data, setData] = useState(null);
-  const auth = localStorage.getItem("userAuth");
+function DashboardCard({data}) {
 
-  useEffect(() => {
-    AxiosConifg.post("/profile/cheker", auth)
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [auth]);
 
   return (
     <>
