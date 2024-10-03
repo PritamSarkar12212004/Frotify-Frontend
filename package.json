@@ -25,7 +25,8 @@
     "react-router-dom": "^6.26.2",
     "react-toastify": "^10.0.5",
     "remixicon": "^4.3.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "vercel": "^37.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
