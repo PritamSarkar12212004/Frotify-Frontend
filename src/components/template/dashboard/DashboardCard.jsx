@@ -1,62 +1,108 @@
 import React, { useEffect, useState } from "react";
-import { FaWallet, FaChartPie, FaPiggyBank } from "react-icons/fa"; // Modern icons
+import { FaWallet, FaChartPie, FaPiggyBank, FaArrowUp, FaArrowDown, FaEquals } from "react-icons/fa"; // Modern icons
 import { motion } from "framer-motion"; // Animation library
 
 function DashboardCard({data}) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   return (
-    <>
-      {data ? (
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 sm:gap-8 gap-2 mt-10 sm:p-4 p-2">
-          {/* Total Budget Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="h-40 bg-gradient-to-br from-green-400 to-green-600 text-white rounded-xl shadow-lg flex justify-between items-center p-6 transform hover:scale-105 transition-transform duration-300 ease-in-out"
-          >
-            <div className="flex flex-col text-center">
-              <span className="text-lg font-semibold">Total Amount</span>
-              <span className="text-2xl font-bold mt-1">$ {data.Budget}</span>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-8"
+    >
+      {/* Total Amount Card */}
+      <motion.div
+        variants={itemVariants}
+        whileHover={{ scale: 1.02 }}
+        className="relative group"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <div className="relative bg-[#1A1F2E]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-6 h-full">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-green-500/20 rounded-xl">
+              <FaWallet className="text-green-400 text-2xl" />
             </div>
-            <FaWallet size={50} className="text-white opacity-90" />
-          </motion.div>
-
-          {/* Spent Money Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-40 bg-gradient-to-br from-red-400 to-red-600 text-white rounded-xl shadow-lg flex justify-between items-center p-6 transform hover:scale-105 transition-transform duration-300 ease-in-out"
-          >
-            <div className="flex flex-col text-center">
-              <span className="text-lg font-semibold">Spend Money</span>
-              <span className="text-2xl font-bold mt-1">$ {data.spend}</span>
+            <div className="flex items-center text-green-400">
+              <FaArrowUp className="mr-1" />
+              <span className="text-sm font-medium">Total Amount</span>
             </div>
-            <FaChartPie size={50} className="text-white opacity-90" />
-          </motion.div>
-
-          {/* Remaining Money Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-40 bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-xl shadow-lg flex justify-between items-center p-6 transform hover:scale-105 transition-transform duration-300 ease-in-out"
-          >
-            <div className="flex flex-col text-center">
-              <span className="text-lg font-semibold">Total Budget</span>
-              <span className="text-2xl font-bold mt-1">
-                $ {data.No_Of_Budget}
-              </span>
-            </div>
-            <FaPiggyBank size={50} className="text-white opacity-90" />
-          </motion.div>
+          </div>
+          <div className="mt-4">
+            <p className="text-3xl font-bold text-white">₹{data.Budget}</p>
+            <p className="text-gray-400 text-sm mt-1">Available balance</p>
+          </div>
         </div>
-      ) : (
-        <p className="text-center text-gray-500">Loading...</p>
-      )}
-    </>
+      </motion.div>
+
+      {/* Spent Money Card */}
+      <motion.div
+        variants={itemVariants}
+        whileHover={{ scale: 1.02 }}
+        className="relative group"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <div className="relative bg-[#1A1F2E]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-6 h-full">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-red-500/20 rounded-xl">
+              <FaChartPie className="text-red-400 text-2xl" />
+            </div>
+            <div className="flex items-center text-red-400">
+              <FaArrowDown className="mr-1" />
+              <span className="text-sm font-medium">Spent Money</span>
+            </div>
+          </div>
+          <div className="mt-4">
+            <p className="text-3xl font-bold text-white">₹{data.spend}</p>
+            <p className="text-gray-400 text-sm mt-1">Total expenses</p>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Total Budget Card */}
+      <motion.div
+        variants={itemVariants}
+        whileHover={{ scale: 1.02 }}
+        className="relative group"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <div className="relative bg-[#1A1F2E]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-6 h-full">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-blue-500/20 rounded-xl">
+              <FaPiggyBank className="text-blue-400 text-2xl" />
+            </div>
+            <div className="flex items-center text-blue-400">
+              <FaEquals className="mr-1" />
+              <span className="text-sm font-medium">Total Budget</span>
+            </div>
+          </div>
+          <div className="mt-4">
+            <p className="text-3xl font-bold text-white">₹{data.No_Of_Budget}</p>
+            <p className="text-gray-400 text-sm mt-1">Monthly limit</p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

@@ -1,41 +1,57 @@
-import React from "react";
+import { motion } from "framer-motion";
+import { FaWallet, FaChartLine, FaPiggyBank } from "react-icons/fa";
 
 function Budaget({ item }) {
   const { icon, name, amount, spend, remainAmount, category } = item;
   const progressPercentage = (spend / amount) * 100;
 
   return (
-    <div className="w-full h-32 border-[2px] border-zinc-400 rounded-xl bg-zinc-200 backdrop-blur-sm shadow-md flex flex-col justify-between cursor-pointer duration-300 sm:px-4 py-4">
-      <div className="w-full flex justify-between">
-        <span className="flex flex-col  text-xl">
-          {/* <span>{icon}</span> */}
-          <span className=" capitalize font-bold">{category}</span>
-          <span className="text-sm opacity-70 lowercase  font-bold">
-            {name}
-          </span>
-        </span>
-        <span className="flex gap-3 text-2xl text-blue-600 font-bold">
-          ${amount.toFixed(2)}
-        </span>
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="w-full h-32 bg-gradient-to-br from-[#1A1F2E] to-[#2A3142] rounded-xl border border-white/10 backdrop-blur-sm shadow-lg flex flex-col justify-between p-4 group"
+    >
+      {/* Header Section */}
+      <div className="w-full flex justify-between items-start">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+              <FaWallet className="text-purple-400" />
+            </div>
+            <span className="text-white font-semibold capitalize">{category}</span>
+          </div>
+          <span className="text-gray-400 text-sm font-medium">{name}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-xl font-bold">${amount.toFixed(2)}</span>
+        </div>
       </div>
+
+      {/* Progress Section */}
       <div className="mt-3">
-        {/* Custom Progress Bar */}
-        <div className="w-full bg-gray-400 rounded-full h-3">
-          <div
-            className="bg-red-600 h-3 rounded-full"
-            style={{ width: `${progressPercentage}%` }}
+        {/* Progress Bar */}
+        <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${progressPercentage}%` }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"
           />
         </div>
-        <div className="mt-2 flex justify-between text-sm text-gray-600">
-          <span className="text-red-500 font-bold">
-            Spent: {spend.toFixed(2)}
-          </span>
-          <span className="text-orange-500 font-bold">
-            Remain Amount: {remainAmount.toFixed(2)}
-          </span>
+
+        {/* Stats */}
+        <div className="mt-3 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <FaChartLine className="text-red-400" />
+            <span className="text-gray-400 text-sm">Spent: <span className="text-red-400 font-semibold">${spend.toFixed(2)}</span></span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaPiggyBank className="text-green-400" />
+            <span className="text-gray-400 text-sm">Left: <span className="text-green-400 font-semibold">${remainAmount.toFixed(2)}</span></span>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
